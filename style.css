@@ -1,5 +1,5 @@
 .ticket {
-    width: 300px;
+    width: 350px;
     background-color: #d3d3d3;
     border: 2px solid black;
     padding: 10px;
@@ -30,10 +30,10 @@
 }
 
 .number-box {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     text-align: center;
-    line-height: 35px;
+    line-height: 40px;
     font-size: 18px;
     font-weight: bold;
     border: 1px solid #333;
@@ -42,8 +42,8 @@
 }
 
 .empty-box {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border: 1px solid transparent;
     background-color: #d3d3d3;
 }
