@@ -6,25 +6,35 @@ function generateTickets() {
     for (let i = 0; i < count; i++) {
         let ticket = document.createElement('div');
         ticket.className = 'ticket';
+        let ticketNumber = String(i + 1).padStart(3, '0'); // Generates "001", "002", etc.
 
-        let uniqueCode = Math.floor(10000 + Math.random() * 90000); // Generate 5-digit code
-        ticket.innerHTML = `<h3>Ticket ${i + 1}</h3><p>Code: ${uniqueCode}</p>`;
+        ticket.innerHTML = `<h3>Ticket No: ${ticketNumber}</h3>`;
+
+        let ticketGrid = document.createElement('div');
+        ticketGrid.className = 'ticket-grid';
 
         let numbers = generateNumbers();
-        numbers.forEach(num => {
-            let numDiv = document.createElement('div');
-            numDiv.className = 'number';
-            numDiv.innerText = num;
-            ticket.appendChild(numDiv);
+        let row = [];
+
+        numbers.forEach((num, index) => {
+            let box = document.createElement('div');
+            box.className = 'number-box';
+            box.innerText = num;
+
+            row.push(box);
+
+            if ((index + 1) % 5 === 0 || index === numbers.length - 1) {
+                let rowDiv = document.createElement('div');
+                rowDiv.className = 'ticket-row';
+                row.forEach(box => rowDiv.appendChild(box));
+                ticketGrid.appendChild(rowDiv);
+                row = [];
+            }
         });
 
+        ticket.appendChild(ticketGrid);
         container.appendChild(ticket);
     }
-}
-
-function setGameTime() {
-    let selectedTime = document.getElementById('gameTime').value;
-    document.getElementById('startTimeDisplay').innerText = selectedTime;
 }
 
 function generateNumbers() {
