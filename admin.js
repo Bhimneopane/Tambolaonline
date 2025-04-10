@@ -7,30 +7,35 @@ function generateTickets() {
         let ticket = document.createElement('div');
         ticket.className = 'ticket';
         let ticketNumber = String(i + 1).padStart(3, '0'); // Generates "001", "002", etc.
-
+        
         ticket.innerHTML = `<h3>Ticket No: ${ticketNumber}</h3>`;
 
         let ticketGrid = document.createElement('div');
         ticketGrid.className = 'ticket-grid';
 
         let numbers = generateNumbers();
-        let row = [];
+        let positionMatrix = generateBlankPositions();
 
-        numbers.forEach((num, index) => {
-            let box = document.createElement('div');
-            box.className = 'number-box';
-            box.innerText = num;
+        for (let row = 0; row < 3; row++) {
+            let rowDiv = document.createElement('div');
+            rowDiv.className = 'ticket-row';
 
-            row.push(box);
+            for (let col = 0; col < 9; col++) {
+                let box = document.createElement('div');
+                box.className = 'number-box';
 
-            if ((index + 1) % 5 === 0 || index === numbers.length - 1) {
-                let rowDiv = document.createElement('div');
-                rowDiv.className = 'ticket-row';
-                row.forEach(box => rowDiv.appendChild(box));
-                ticketGrid.appendChild(rowDiv);
-                row = [];
+                if (positionMatrix[row].includes(col)) {
+                    box.innerText = numbers.pop(); // Assign a number from the list
+                } else {
+                    box.innerText = ""; // Empty space
+                    box.classList.add('empty-box');
+                }
+
+                rowDiv.appendChild(box);
             }
-        });
+
+            ticketGrid.appendChild(rowDiv);
+        }
 
         ticket.appendChild(ticketGrid);
         container.appendChild(ticket);
@@ -45,5 +50,22 @@ function generateNumbers() {
             numbers.push(num);
         }
     }
-    return numbers;
+    return numbers.sort((a, b) => a - b); // Sorted for better readability
+}
+
+function generateBlankPositions() {
+    let rows = [];
+
+    for (let i = 0; i < 3; i++) {
+        let positions = [];
+        while (positions.length < 5) {
+            let pos = Math.floor(Math.random() * 9);
+            if (!positions.includes(pos)) {
+                positions.push(pos);
+            }
+        }
+        rows.push(positions);
+    }
+
+    return rows;
 }
