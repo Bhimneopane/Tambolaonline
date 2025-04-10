@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambola Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Tambola Game</h1>
+
+    <h3>Game Starts At: <span id="gameStartTime">Not Set</span></h3>
+    
+    <label for="playerCode">Enter Your Unique Code:</label>
+    <input type="text" id="playerCode">
+    <button onclick="fetchTicket()">Get My Ticket</button>
+
+    <div id="playerTicket"></div>
+
+    <h2>Live Numbers: <span id="liveNumber"></span></h2>
+
+    <script src="player.js"></script>
+</body>
+</html>
